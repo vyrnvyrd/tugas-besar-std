@@ -1,4 +1,12 @@
 # depslib dependency file v1.0
-1654605955 source:d:\dokumen\ekstensi\perkuliahan\semester 1\(std) struktur data\tugas besar\tugas-besar-std\main.cpp
+1654608939 source:d:\dokumen\ekstensi\perkuliahan\semester 1\(std) struktur data\tugas besar\tugas-besar-std\main.cpp
+	<iostream>
+	"mll.h"
+
+1654608955 source:d:\dokumen\ekstensi\perkuliahan\semester 1\(std) struktur data\tugas besar\tugas-besar-std\mll.cpp
+	<iostream>
+	"mll.h"
+
+1654608725 d:\dokumen\ekstensi\perkuliahan\semester 1\(std) struktur data\tugas besar\tugas-besar-std\mll.h
 	<iostream>
 
