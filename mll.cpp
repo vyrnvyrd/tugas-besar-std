@@ -25,11 +25,7 @@ void Insert_Last_Dosen(mll &list_dosen, adr_dosen adrDosen) {
 }
 
 bool isListDosenEmpty(mll list_dosen){
-    if (list_dosen.first == nil){
-        return true;
-    }else{
-        return false;
-    }
+    return first(list_dosen) == nil;
 }
 
 adr_dosen searchDosenByCode(mll list_dosen, string kode_dosen) {
@@ -38,7 +34,7 @@ adr_dosen searchDosenByCode(mll list_dosen, string kode_dosen) {
     if (isListDosenEmpty(list_dosen)){
         cout << "Daftar Dosen Kosong!" << endl;
     }else{
-        curr = list_dosen.first;
+        curr = first(list_dosen);
         while(curr != nil && info(curr).kode_dosen != kode_dosen){
             curr = nextDosen(curr);
         }
