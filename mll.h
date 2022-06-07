@@ -21,7 +21,7 @@ struct elm_mahasiswa {
 
 typedef struct elm_dosen *adr_dosen;
 struct dosen {
-    string nik, nama;
+    string nik, nama, kode_dosen, matkul;
 };
 struct elm_dosen {
     dosen info;
@@ -36,5 +36,10 @@ struct mll {
 void Create_List(mll &list_dosen);
 void New_Elm_Dosen(dosen dataDosen, adr_dosen &adrDosen);
 void Insert_Last_Dosen(mll &list_dosen, adr_dosen adrDosen);
+
+void showDosenData(mll list_dosen, string nik);
+adr_dosen searchDosenByCode(mll list_dosen, string kode_dosen);
+
+bool isListDosenEmpty(mll list_dosen, string kode_dosen);
 
 #endif // MLL_H_INCLUDED

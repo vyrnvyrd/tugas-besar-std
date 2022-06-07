@@ -23,3 +23,33 @@ void Insert_Last_Dosen(mll &list_dosen, adr_dosen adrDosen) {
         nextDosen(P) = adrDosen;
     }
 }
+
+bool isListDosenEmpty(mll list_dosen){
+    return first(list_dosen) == nil;
+}
+
+adr_dosen searchDosenByCode(mll list_dosen, string kode_dosen) {
+    adr_dosen curr;
+
+    if (isListDosenEmpty(list_dosen)){
+        cout << "Daftar Dosen Kosong!" << endl;
+    }else{
+        curr = first(list_dosen);
+        while(curr != nil && info(curr).kode_dosen != kode_dosen){
+            curr = nextDosen(curr);
+        }
+        return curr;
+    }
+}
+
+void showDosenData(mll list_dosen, string kode_dosen) {
+    adr_dosen searched = searchDosenByCode(list_dosen, kode_dosen);
+    if (searched == nil){
+        cout << "Dosen dengan kode dosen " << kode_dosen << " tidak Ditemukan" << endl;
+    }else{
+        cout << "Nama                   : " << info(searched).nama << endl;
+        cout << "NIK                    : " << info(searched).nik << endl;
+        cout << "Mata Kuliah Pengampu   : " << info(searched).matkul << endl;
+        cout << "Kode Dosen             : " << info(searched).kode_dosen << endl;
+    }
+}

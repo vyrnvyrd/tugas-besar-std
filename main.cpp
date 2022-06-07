@@ -11,10 +11,13 @@ int main()
     adr_dosen adrDosen;
 
     //make sure procedure Insert_Last_Dosen
-    New_Elm_Dosen({"11111", "Ida"}, adrDosen);
+    New_Elm_Dosen({"11111", "Ida", "ID", "Dasar-Dasar Pemograman"}, adrDosen);
     Insert_Last_Dosen(list_dosen, adrDosen);
-    New_Elm_Dosen({"22222", "Ardi"}, adrDosen);
+    New_Elm_Dosen({"22222", "Ardi", "ARD", "Algoritma Pemrograman"}, adrDosen);
     Insert_Last_Dosen(list_dosen, adrDosen);
+
+    showDosenData(list_dosen,"ARD");
+
 
     return 0;
 }
