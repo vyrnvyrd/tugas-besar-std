@@ -120,3 +120,31 @@ void Show_All_Dosen(mll list_dosen){
     }
     cout << endl;
 }
+
+void Insert_New_Mahasiswa(mll &list_dosen, adr_dosen adrDosen, adr_mahasiswa adrMahasiswa){
+    if (adrDosen != nil) {
+        if (nextMahasiswa(adrDosen) == nil){
+            cout << "Berhasil" << endl;
+            nextMahasiswa(adrDosen) = adrMahasiswa;
+        } else {
+            adr_mahasiswa mahasiswa = nextMahasiswa(adrDosen);
+            while(nextMahasiswa(mahasiswa) != nil){
+                mahasiswa = nextMahasiswa(mahasiswa);
+            }
+            if (info(mahasiswa).nim != info(adrMahasiswa).nim && info(mahasiswa).nama != info(adrMahasiswa).nama) {
+                cout << "Berhasil" << endl;
+                nextMahasiswa(mahasiswa) = adrMahasiswa;
+            } else {
+                cout << "Maaf mahasiswa sudah tergabung!" << endl;
+            }
+        }
+    } else {
+        cout << "Maaf kode dosen tidak ditemukan!" << endl;
+    }
+}
+
+void New_Elm_Mahasiswa(mahasiswa dataMahasiswa, adr_mahasiswa &adrMahasiswa){
+    adrMahasiswa = new elm_mahasiswa;
+    nextMahasiswa(adrMahasiswa) = nil;
+    info(adrMahasiswa) = dataMahasiswa;
+}
