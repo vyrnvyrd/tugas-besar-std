@@ -42,7 +42,7 @@ adr_dosen Search_Dosen_By_Code(mll list_dosen, string kode_dosen) {
     return curr;
 }
 
-void showDosenData(mll list_dosen, string kode_dosen) {
+void Show_Dosen_Data(mll list_dosen, string kode_dosen) {
     adr_dosen searched = Search_Dosen_By_Code(list_dosen, kode_dosen);
     if (searched == nil){
         cout << "Dosen dengan kode dosen " << kode_dosen << " tidak Ditemukan" << endl;
