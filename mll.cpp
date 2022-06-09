@@ -24,14 +24,14 @@ void Insert_Last_Dosen(mll &list_dosen, adr_dosen adrDosen) {
     }
 }
 
-bool isListDosenEmpty(mll list_dosen){
+bool Is_List_Dosen_Empty(mll list_dosen){
     return first(list_dosen) == nil;
 }
 
-adr_dosen searchDosenByCode(mll list_dosen, string kode_dosen) {
+adr_dosen Search_Dosen_By_Code(mll list_dosen, string kode_dosen) {
     adr_dosen curr;
 
-    if (isListDosenEmpty(list_dosen)){
+    if (Is_List_Dosen_Empty(list_dosen)){
         cout << "Daftar Dosen Kosong!" << endl;
     }else{
         curr = first(list_dosen);
@@ -43,7 +43,7 @@ adr_dosen searchDosenByCode(mll list_dosen, string kode_dosen) {
 }
 
 void showDosenData(mll list_dosen, string kode_dosen) {
-    adr_dosen searched = searchDosenByCode(list_dosen, kode_dosen);
+    adr_dosen searched = Search_Dosen_By_Code(list_dosen, kode_dosen);
     if (searched == nil){
         cout << "Dosen dengan kode dosen " << kode_dosen << " tidak Ditemukan" << endl;
     }else{
@@ -147,4 +147,49 @@ void New_Elm_Mahasiswa(mahasiswa dataMahasiswa, adr_mahasiswa &adrMahasiswa){
     adrMahasiswa = new elm_mahasiswa;
     nextMahasiswa(adrMahasiswa) = nil;
     info(adrMahasiswa) = dataMahasiswa;
+}
+
+adr_mahasiswa Search_Mahasiswa_From_Dosen(adr_dosen dosen, string nim_mhs){
+    adr_mahasiswa currMhs = nextMahasiswa(dosen);
+
+    do{
+        if (currMhs != nil && info(currMhs).nim == nim_mhs){
+            return currMhs;
+        }
+        currMhs = nextMahasiswa(currMhs);
+    }while(currMhs != nil);
+
+    cout << "Tidak ada mahasiswa yang dibimbing oleh dosen " << info(dosen).nama << endl;
+
+    return currMhs;
+}
+
+void Delete_Relation_Dosen_and_Mahasiswa(mll &list_dosen, adr_dosen adrDosen, adr_mahasiswa adrMahasiswa){
+
+}
+
+string Search_Nama_Dospem_From_Mahasiswa(mll list_dosen, adr_mahasiswa adrMahasiswa){
+    adr_dosen currDosen = first(list_dosen);
+
+    if (currDosen == nil){
+        cout << "Data Dosen Kosong" << endl;
+        return "";
+    }else{
+        do {
+            adr_mahasiswa currMhs = nextMahasiswa(currDosen);
+            cout << info(currMhs).nama << endl;
+            while(currMhs != nil && currMhs != adrMahasiswa){
+                currMhs = nextMahasiswa(currMhs);
+            }
+            if (currMhs == adrMahasiswa){
+                    return info(currDosen).nama;
+            }else{
+                currDosen = nextDosen(currDosen);
+            }
+        }while(currDosen == nil);
+    }
+
+    cout << "Tidak ada dosen pembimbing dari mahasiswa " << info(adrMahasiswa).nama << endl;
+
+    return "";
 }
