@@ -39,7 +39,7 @@ void Insert_Last_Dosen(mll &list_dosen, adr_dosen adrDosen);
 adr_dosen Delete_First_Dosen(mll &list_dosen);
 adr_dosen Delete_Last_Dosen(mll &list_dosen);
 adr_dosen Delete_After_Dosen(mll &list_dosen, adr_dosen prev, adr_dosen curr);
-adr_dosen Delete_DosenX(mll &list_dosen, string kode_dosen);
+adr_dosen Delete_DosenX(mll &list_dosen, adr_dosen adrDosen);
 void showDosenData(mll list_dosen, string nik);
 void Show_All_Dosen(mll list_dosen);
 adr_dosen searchDosenByCode(mll list_dosen, string kode_dosen);
