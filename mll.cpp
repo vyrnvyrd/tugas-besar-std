@@ -86,24 +86,23 @@ adr_dosen Delete_After_Dosen(mll &list_dosen, adr_dosen prev, adr_dosen curr){
     return curr;
 };
 
-adr_dosen Delete_DosenX(mll &list_dosen, string kode_dosen){
-    adr_dosen curr, prev, data;
+adr_dosen Delete_DosenX(mll &list_dosen, adr_dosen adrDosen){
+    adr_dosen firstData, prev, data;
 
-    prev = nil;
     data = nil;
-    curr = first(list_dosen);
-    while(curr != nil && info(curr).kode_dosen != kode_dosen){
-        prev = curr;
-        curr = nextDosen(curr);
-    }
+    firstData = first(list_dosen);
 
-    if (curr != nil){
-        if (prev == nil && curr == first(list_dosen)) {
+    if (firstData != nil){
+        if (firstData == adrDosen) {
             data = Delete_First_Dosen(list_dosen);
-        } else if (nextDosen(curr) == nil) {
+        } else if (nextDosen(firstData) == nil) {
             data = Delete_Last_Dosen(list_dosen);
         } else {
-            data = Delete_After_Dosen(list_dosen, prev, curr);
+            prev = first(list_dosen);
+            while (nextDosen(prev) != adrDosen) {
+                prev = nextDosen(prev);
+            }
+            data = Delete_After_Dosen(list_dosen, prev, firstData);
         }
     } else {
         cout << "Data Dosen tidak ditemukan!" << endl;
