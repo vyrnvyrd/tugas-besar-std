@@ -160,7 +160,6 @@ void New_Elm_Mahasiswa(mahasiswa dataMahasiswa, adr_mahasiswa &adrMahasiswa){
 adr_mahasiswa Search_Mahasiswa_From_Dosen(adr_dosen dosen, string nim_mhs){
     adr_mahasiswa currMhs = nextMahasiswa(dosen);
 
-    cout << "Masuk " << info(currMhs).nama << endl;
     do{
         if (currMhs != nil && info(currMhs).nim == nim_mhs){
             return currMhs;
