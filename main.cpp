@@ -18,11 +18,15 @@ int main()
     New_Elm_Dosen({"44444", "Cintya", "CN", "Bhs Inggris"}, adrDosen);
     Insert_Last_Dosen(list_dosen, adrDosen);
 
+    Show_All_Dosen(list_dosen);
+
     // temp logic add mahasiswa
     adr_mahasiswa adrMahasiswa;
     New_Elm_Mahasiswa({"12345", "Firna", "Pengembangan TI"}, adrMahasiswa);
     Insert_New_Mahasiswa(list_dosen, Search_Dosen_By_Code(list_dosen, "ARD"), adrMahasiswa);
     New_Elm_Mahasiswa({"23456", "Mazid", "Pengembangan TI"}, adrMahasiswa);
+    Insert_New_Mahasiswa(list_dosen, Search_Dosen_By_Code(list_dosen, "ID"), adrMahasiswa);
+    New_Elm_Mahasiswa({"22121", "Ali", "Pengembangan TI"}, adrMahasiswa);
     Insert_New_Mahasiswa(list_dosen, Search_Dosen_By_Code(list_dosen, "ID"), adrMahasiswa);
 
     string namaDosen = Search_Nama_Dospem_From_Mahasiswa(list_dosen, adrMahasiswa);
@@ -40,8 +44,11 @@ int main()
 
 //    showDosenData(list_dosen,"ARD");
 
-    adrMahasiswa = Search_Mahasiswa_From_Dosen(Search_Dosen_By_Code(list_dosen,"ID"), "23456");
+
+    adrMahasiswa = Search_Mahasiswa_From_Dosen(Search_Dosen_By_Code(list_dosen,"ARD"), "12345");
     cout << info(adrMahasiswa).nama << endl;
+
+    Show_Dosen_Data(list_dosen, "ID");
 
     cout << "----------------------------------------------------------" << endl;
     Show_Dosen_Data(list_dosen,"ARD");
@@ -55,6 +62,10 @@ int main()
     Show_All_Dosen(list_dosen);
     cout << "data yang didelete: " << info(dataDelete).nama << endl;
     cout << "---------------------------------------------------------" << endl;
+
+    adr_dosen targetDosen = Search_Dosen_By_Code(list_dosen, "ID");
+    Delete_Relation_Dosen_and_Mahasiswa(list_dosen, targetDosen, Search_Mahasiswa_From_Dosen(targetDosen, "23456"));
+    Show_Dosen_Data(list_dosen, "ID");
 
     return 0;
 }

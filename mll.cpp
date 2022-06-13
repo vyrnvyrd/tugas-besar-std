@@ -39,6 +39,7 @@ adr_dosen Search_Dosen_By_Code(mll list_dosen, string kode_dosen) {
             curr = nextDosen(curr);
         }
     }
+    cout << "Nama :" << info(curr).nama << endl;
     return curr;
 }
 
@@ -51,6 +52,14 @@ void Show_Dosen_Data(mll list_dosen, string kode_dosen) {
         cout << "NIK                    : " << info(searched).nik << endl;
         cout << "Mata Kuliah Pengampu   : " << info(searched).matkul << endl;
         cout << "Kode Dosen             : " << info(searched).kode_dosen << endl;
+        adr_mahasiswa mhsDibimbing = nextMahasiswa(searched);
+        if ( mhsDibimbing != nil){
+            cout << "Daftar Mahasiswa Yang Dimbimbing : " << endl;
+            while(mhsDibimbing != nil){
+                cout << "  - " << info(mhsDibimbing).nim << " " << info(mhsDibimbing).nama << " Judul TA: " << info(mhsDibimbing).judulTugasAkhir << endl;
+                mhsDibimbing = nextMahasiswa(mhsDibimbing);
+            }
+        }
     }
 }
 
@@ -164,8 +173,55 @@ adr_mahasiswa Search_Mahasiswa_From_Dosen(adr_dosen dosen, string nim_mhs){
 }
 
 void Delete_Relation_Dosen_and_Mahasiswa(mll &list_dosen, adr_dosen adrDosen, adr_mahasiswa adrMahasiswa){
-
+    if (adrDosen != nil && adrMahasiswa != nil){
+        adr_dosen currDosen = first(list_dosen);
+        if (currDosen != nil){
+            while(currDosen != adrDosen){
+                currDosen = nextDosen(currDosen);
+            }
+            if (currDosen != nil){
+                adr_mahasiswa currMhs = nextMahasiswa(currDosen);
+                if (currMhs != adrMahasiswa){
+                    while(currMhs != nil && nextMahasiswa(currMhs) != adrMahasiswa){
+                        currMhs == nextMahasiswa(currMhs);
+                    }
+                    if (currMhs != nil){
+                            cout << info(currMhs).nama << endl;
+                        nextMahasiswa(currMhs) = nextMahasiswa(nextMahasiswa(currMhs));
+                    }
+                }else{
+                    nextMahasiswa(currDosen) = nextMahasiswa(currMhs);
+                }
+            }
+        }
+    }
 }
+
+void Delete_Mahasiswa_Bimbingan_From_Dosen(mll &list_dosen, adr_dosen adrDosen, adr_mahasiswa adrMahasiswa){
+    if (adrDosen != nil && adrMahasiswa != nil){
+        adr_dosen currDosen = first(list_dosen);
+        if (currDosen != nil){
+            while(currDosen != adrDosen){
+                currDosen = nextDosen(currDosen);
+            }
+            if (currDosen != nil){
+                adr_mahasiswa currMhs = nextMahasiswa(currDosen);
+                if (currMhs != adrMahasiswa){
+                    while(currMhs != nil && nextMahasiswa(currMhs) != adrMahasiswa){
+                        currMhs == nextMahasiswa(currMhs);
+                    }
+                    if (currMhs != nil){
+                            cout << info(currMhs).nama << endl;
+                        nextMahasiswa(currMhs) = nextMahasiswa(nextMahasiswa(currMhs));
+                    }
+                }else{
+                    nextMahasiswa(currDosen) = nextMahasiswa(currMhs);
+                }
+            }
+        }
+    }
+}
+
 
 string Search_Nama_Dospem_From_Mahasiswa(mll list_dosen, adr_mahasiswa adrMahasiswa){
     adr_dosen currDosen = first(list_dosen);
