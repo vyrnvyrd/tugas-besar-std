@@ -67,5 +67,13 @@ int main()
     Delete_Relation_Dosen_and_Mahasiswa(list_dosen, targetDosen, Search_Mahasiswa_From_Dosen(targetDosen, "23456"));
     Show_Dosen_Data(list_dosen, "ID");
 
+
+    cout << "----------------------------------------------------------" << endl;
+    cout << "List Mahasiswa" << endl;
+    cout << "----------------------------------------------------------" << endl;
+    found = Search_Dosen_By_Code(list_dosen, "ID");
+    Show_Mahasiswa_From_Dosen(found);
+    cout << "----------------------------------------------------------" << endl;
+
     return 0;
 }

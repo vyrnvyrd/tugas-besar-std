@@ -248,3 +248,17 @@ string Search_Nama_Dospem_From_Mahasiswa(mll list_dosen, adr_mahasiswa adrMahasi
 
     return "";
 }
+
+void Show_Mahasiswa_From_Dosen(adr_dosen adrDosen){
+    if (nextMahasiswa(adrDosen) != nil) {
+        adr_mahasiswa mhsDibimbing;
+
+        mhsDibimbing = nextMahasiswa(adrDosen);
+        while (mhsDibimbing != nil) {
+            cout << "  - " << info(mhsDibimbing).nim << " " << info(mhsDibimbing).nama << " Judul TA: " << info(mhsDibimbing).judulTugasAkhir << endl;
+            mhsDibimbing = nextMahasiswa(mhsDibimbing);
+        }
+    } else {
+        cout << "Tidak ada mahasiswa yang terdaftar!" << endl;
+    }
+}

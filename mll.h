@@ -44,7 +44,7 @@ adr_dosen Delete_DosenX(mll &list_dosen, adr_dosen adrDosen);
 void Show_All_Dosen(mll list_dosen);
 adr_dosen Search_Dosen_By_Code(mll list_dosen, string kode_dosen);
 bool Is_List_Dosen_Empty(mll list_dosen, string kode_dosen);
-
+void Show_Mahasiswa_From_Dosen(adr_dosen adrDosen);
 void New_Elm_Mahasiswa(mahasiswa dataMahasiswa, adr_mahasiswa &adrMahasiswa);
 void Insert_New_Mahasiswa(mll &list_dosen, adr_dosen adrDosen, adr_mahasiswa adrMahasiswa);
 
