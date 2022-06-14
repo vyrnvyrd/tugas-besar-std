@@ -54,5 +54,14 @@ void Delete_Mahasiswa_Bimbingan_From_Dosen(mll &list_dosen, adr_dosen adrDosen, 
 void Show_Largest_Mahasiswa(mll list_dosen);
 string Search_Nama_Dospem_From_Mahasiswa(mll list_dosen, adr_mahasiswa adrMahasiswa);
 
+// menu
+void Back_To_Menu(int &input);
+void Menu_Exit();
+void Menu_Tambah_Dosen(mll &list_dosen, int &input);
+void Menu_Hapus_Dosen(mll &list_dosen, int &input);
+void Menu_Tambah_Mahasiswa_Ke_Dosen(mll &list_dosen, int &input);
+void Menu_Tampilkan_Mahasiswa_Dari_Dosen(mll &list_dosen, int &input);
+void Menu_Mahasiswa_Terbanyak(mll &list_dosen, int &input);
+
 
 #endif // MLL_H_INCLUDED

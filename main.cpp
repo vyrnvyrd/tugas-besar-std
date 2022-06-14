@@ -1,14 +1,19 @@
 #include <iostream>
+#include <stdlib.h>
 #include "mll.h"
 
 using namespace std;
 
 int main()
 {
-    // temp logic add dosen
     mll list_dosen;
+    adr_dosen adrDosen;
+    adr_mahasiswa adrMahasiswa;
+    int input;
+
     Create_List(list_dosen);
-    adr_dosen adrDosen, found, dataDelete;
+
+    // initial dosen
     New_Elm_Dosen({"11111", "Ida", "ID", "Dasar-Dasar Pemograman"}, adrDosen);
     Insert_Last_Dosen(list_dosen, adrDosen);
     New_Elm_Dosen({"22222", "Ardi", "ARD", "Algoritma Pemrograman"}, adrDosen);
@@ -18,68 +23,66 @@ int main()
     New_Elm_Dosen({"44444", "Cintya", "CN", "Bhs Inggris"}, adrDosen);
     Insert_Last_Dosen(list_dosen, adrDosen);
 
-    Show_All_Dosen(list_dosen);
-
-    // temp logic add mahasiswa
-    adr_mahasiswa adrMahasiswa;
+    // initial mahasiswa
     New_Elm_Mahasiswa({"12345", "Firna", "Pengembangan TI"}, adrMahasiswa);
     Insert_New_Mahasiswa(list_dosen, Search_Dosen_By_Code(list_dosen, "ARD"), adrMahasiswa);
-    New_Elm_Mahasiswa({"23456", "Mazid", "Pengembangan TI"}, adrMahasiswa);
+    New_Elm_Mahasiswa({"23456", "Mazid", "Sistem Informasi Pajak"}, adrMahasiswa);
     Insert_New_Mahasiswa(list_dosen, Search_Dosen_By_Code(list_dosen, "ID"), adrMahasiswa);
-    New_Elm_Mahasiswa({"22121", "Ali", "Pengembangan TI"}, adrMahasiswa);
+    New_Elm_Mahasiswa({"22121", "Ali", "Anterin Makan"}, adrMahasiswa);
     Insert_New_Mahasiswa(list_dosen, Search_Dosen_By_Code(list_dosen, "ID"), adrMahasiswa);
 
-    string namaDosen = Search_Nama_Dospem_From_Mahasiswa(list_dosen, adrMahasiswa);
 
-    if (namaDosen.empty()){
+    input = 1;
+    while (input != 99) {
+        cout << "=========================================================" << endl;
+        cout << "=                                                       =" << endl;
+        cout << "=  SISTEM INFORMASI DATA MAHASISWA DAN DOSEN BIMBINGAN  =" << endl;
+        cout << "=                                                       =" << endl;
+        cout << "=========================================================" << endl;
+        cout << "  Menu " << endl;
+        cout << "  1. Tambah Data Dosen X" << endl;
+        cout << "  2. Menampilkan Data Dosen X" << endl;
+        cout << "  3. Hapus Dosen X" << endl;
+        cout << "  4. Cari Dosen X" << endl;
+        cout << "  5. Tambah Mahasiswa Y untuk Dosen X" << endl;
+        cout << "  6. Hapus Mahasiswa Y dari Dosen X" << endl;
+        cout << "  7. Menampilkan Seluruh Mahasiswa dari Dosen X" << endl;
+        cout << "  8. Mencari Mahasiswa X dari Dosen Y" << endl;
+        cout << "  9. Membuat Relasi antara Dosen X dan Mahasiswa Y" << endl;
+        cout << "  10. Menghapus Relasi antara Dosen X dan Mahasiswa Y" << endl;
+        cout << "  11. Menampilkan Mahasiswa terbanyak dari Dosen X" << endl;
+        cout << "  12. Mencari Dosen X dari Mahasiswa Y" << endl;
+        cout << "  99. Exit" << endl;
+        cout << "---------------------------------------------------------" << endl;
+        cout << "Pilihan: ";
+        cin >> input;
 
-    }else{
-        cout << "Nama Dosen : " << namaDosen << endl;
+        system("CLS");
+        switch (input) {
+            case 1:
+                Menu_Tambah_Dosen(list_dosen, input);
+                break;
+            case 3:
+                Menu_Hapus_Dosen(list_dosen, input);
+                break;
+            case 5:
+                Menu_Tambah_Mahasiswa_Ke_Dosen(list_dosen, input);
+                break;
+            case 7:
+                Menu_Tampilkan_Mahasiswa_Dari_Dosen(list_dosen, input);
+                break;
+            case 9:
+                Menu_Tambah_Mahasiswa_Ke_Dosen(list_dosen, input);
+                break;
+            case 11:
+                Menu_Mahasiswa_Terbanyak(list_dosen, input);
+                break;
+        }
+
+        if (input == 99) {
+            Menu_Exit();
+        }
     }
-
-//    Show_All_Dosen(list_dosen);
-//    dataDelete = Delete_DosenX(list_dosen, "BM");
-//    Show_All_Dosen(list_dosen);
-//    cout << "data yang didelete: " << info(dataDelete).nama << endl;
-
-//    showDosenData(list_dosen,"ARD");
-
-
-    adrMahasiswa = Search_Mahasiswa_From_Dosen(Search_Dosen_By_Code(list_dosen,"ARD"), "12345");
-    cout << info(adrMahasiswa).nama << endl;
-
-    Show_Dosen_Data(list_dosen, "ID");
-
-    cout << "----------------------------------------------------------" << endl;
-    Show_Dosen_Data(list_dosen,"ARD");
-    cout << "----------------------------------------------------------" << endl;
-    Show_All_Dosen(list_dosen);
-    found = Search_Dosen_By_Code(list_dosen, "ARD");
-    cout << "ketemu: " << info(found).nama << endl;
-    if (found != nil) {
-        dataDelete = Delete_DosenX(list_dosen, found);
-    }
-    Show_All_Dosen(list_dosen);
-    cout << "data yang didelete: " << info(dataDelete).nama << endl;
-    cout << "---------------------------------------------------------" << endl;
-
-    adr_dosen targetDosen = Search_Dosen_By_Code(list_dosen, "ID");
-    Delete_Relation_Dosen_and_Mahasiswa(list_dosen, targetDosen, Search_Mahasiswa_From_Dosen(targetDosen, "23456"));
-    Show_Dosen_Data(list_dosen, "ID");
-
-
-    cout << "----------------------------------------------------------" << endl;
-    cout << "List Mahasiswa" << endl;
-    cout << "----------------------------------------------------------" << endl;
-    found = Search_Dosen_By_Code(list_dosen, "ID");
-    Show_Mahasiswa_From_Dosen(found);
-    cout << "----------------------------------------------------------" << endl;
-
-    cout << "----------------------------------------------------------" << endl;
-    cout << "Larger Mahasiswa" << endl;
-    cout << "----------------------------------------------------------" << endl;
-    Show_Largest_Mahasiswa(list_dosen);
-    cout << "----------------------------------------------------------" << endl;
 
     return 0;
 }
