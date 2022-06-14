@@ -47,11 +47,11 @@ bool Is_List_Dosen_Empty(mll list_dosen, string kode_dosen);
 void Show_Mahasiswa_From_Dosen(adr_dosen adrDosen);
 void New_Elm_Mahasiswa(mahasiswa dataMahasiswa, adr_mahasiswa &adrMahasiswa);
 void Insert_New_Mahasiswa(mll &list_dosen, adr_dosen adrDosen, adr_mahasiswa adrMahasiswa);
-
+int Count_Mahasiswa_From_Dosen(adr_dosen adrDosen);
 adr_mahasiswa Search_Mahasiswa_From_Dosen(adr_dosen dosen, string nim_mhs);
 void Delete_Relation_Dosen_and_Mahasiswa(mll &list_dosen, adr_dosen adrDosen, adr_mahasiswa adrMahasiswa);
 void Delete_Mahasiswa_Bimbingan_From_Dosen(mll &list_dosen, adr_dosen adrDosen, adr_mahasiswa adrMahasiswa);
-
+void Show_Largest_Mahasiswa(mll list_dosen);
 string Search_Nama_Dospem_From_Mahasiswa(mll list_dosen, adr_mahasiswa adrMahasiswa);
 
 

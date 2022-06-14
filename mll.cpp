@@ -52,14 +52,9 @@ void Show_Dosen_Data(mll list_dosen, string kode_dosen) {
         cout << "NIK                    : " << info(searched).nik << endl;
         cout << "Mata Kuliah Pengampu   : " << info(searched).matkul << endl;
         cout << "Kode Dosen             : " << info(searched).kode_dosen << endl;
-        adr_mahasiswa mhsDibimbing = nextMahasiswa(searched);
-        if ( mhsDibimbing != nil){
-            cout << "Daftar Mahasiswa Yang Dimbimbing : " << endl;
-            while(mhsDibimbing != nil){
-                cout << "  - " << info(mhsDibimbing).nim << " " << info(mhsDibimbing).nama << " Judul TA: " << info(mhsDibimbing).judulTugasAkhir << endl;
-                mhsDibimbing = nextMahasiswa(mhsDibimbing);
-            }
-        }
+
+        cout << "Daftar Mahasiswa Yang Dimbimbing : " << endl;
+        Show_Mahasiswa_From_Dosen(searched);
     }
 }
 
@@ -260,5 +255,49 @@ void Show_Mahasiswa_From_Dosen(adr_dosen adrDosen){
         }
     } else {
         cout << "Tidak ada mahasiswa yang terdaftar!" << endl;
+    }
+}
+
+int Count_Mahasiswa_From_Dosen(adr_dosen adrDosen){
+    int total;
+
+    total = 0;
+    if (nextMahasiswa(adrDosen) != nil) {
+        adr_mahasiswa mhsDibimbing;
+
+        mhsDibimbing = nextMahasiswa(adrDosen);
+        while (mhsDibimbing != nil) {
+            total = total + 1;
+            mhsDibimbing = nextMahasiswa(mhsDibimbing);
+        }
+    }
+
+    return total;
+}
+
+void Show_Largest_Mahasiswa(mll list_dosen){
+    adr_dosen p, maxDosen;
+    int maxTotal, tempTotal;
+
+
+    maxTotal = 0;
+    tempTotal = 0;
+    maxDosen = nil;
+    p = first(list_dosen);
+
+    while(p != nil){
+        tempTotal = Count_Mahasiswa_From_Dosen(p);
+        if (tempTotal > maxTotal){
+            maxTotal = tempTotal;
+            maxDosen = p;
+        }
+        p = nextDosen(p);
+    }
+
+    if (maxDosen == nil && maxTotal == 0){
+        cout << "Tidak ada dosen dengan jumlah mahasiswa terbanyak!" << endl;
+    } else {
+        cout << "Total Mahasiswa: " << maxTotal << endl;
+        Show_Dosen_Data(list_dosen, info(maxDosen).kode_dosen);
     }
 }
