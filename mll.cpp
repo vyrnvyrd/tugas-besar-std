@@ -1,5 +1,8 @@
 #include <iostream>
+#include <string>
 #include "mll.h"
+
+using namespace std;
 
 void Create_List(mll &list_dosen){
     first(list_dosen) = nil;
@@ -39,7 +42,6 @@ adr_dosen Search_Dosen_By_Code(mll list_dosen, string kode_dosen) {
             curr = nextDosen(curr);
         }
     }
-    cout << "Nama :" << info(curr).nama << endl;
     return curr;
 }
 
@@ -127,7 +129,6 @@ void Show_All_Dosen(mll list_dosen){
 void Insert_New_Mahasiswa(mll &list_dosen, adr_dosen adrDosen, adr_mahasiswa adrMahasiswa){
     if (adrDosen != nil) {
         if (nextMahasiswa(adrDosen) == nil){
-            cout << "Berhasil" << endl;
             nextMahasiswa(adrDosen) = adrMahasiswa;
         } else {
             adr_mahasiswa mahasiswa = nextMahasiswa(adrDosen);
@@ -135,7 +136,6 @@ void Insert_New_Mahasiswa(mll &list_dosen, adr_dosen adrDosen, adr_mahasiswa adr
                 mahasiswa = nextMahasiswa(mahasiswa);
             }
             if (info(mahasiswa).nim != info(adrMahasiswa).nim && info(mahasiswa).nama != info(adrMahasiswa).nama) {
-                cout << "Berhasil" << endl;
                 nextMahasiswa(mahasiswa) = adrMahasiswa;
             } else {
                 cout << "Maaf mahasiswa sudah tergabung!" << endl;
@@ -298,6 +298,110 @@ void Show_Largest_Mahasiswa(mll list_dosen){
         cout << "Tidak ada dosen dengan jumlah mahasiswa terbanyak!" << endl;
     } else {
         cout << "Total Mahasiswa: " << maxTotal << endl;
+        cout << endl;
         Show_Dosen_Data(list_dosen, info(maxDosen).kode_dosen);
     }
+}
+
+void Back_To_Menu(int &input){
+    char decision;
+
+    decision = 'l';
+    while (decision != 'Y' && decision != 'y' && decision != 'N' && decision != 'n') {
+        cout << "Back to Menu? [Y/N] : "; cin >> decision;
+        cout << endl;
+    }
+    if (decision == 'n' || decision == 'N'){
+        input = 99;
+    }
+
+    system("CLS");
+}
+
+void Menu_Exit(){
+    cout << "TERIMAKASIH" << endl;
+    cout << "\nDevelop By: " << endl;
+    cout << "1. 1301218681 - Firna Firdiani" << endl;
+    cout << "1. 1301218683 - Mazid Ahmad" << endl;
+}
+
+void Menu_Tambah_Dosen(mll &list_dosen, int &input){
+    dosen dataInput;
+    adr_dosen adrDosen;
+
+    cout << "Lengkapi Data Berikut!" << endl;
+    cout << "NIK         : "; cin.ignore(1,'\n'); getline(cin, dataInput.nik, '\n') ;
+    cout << "Kode Dosen  : "; cin.ignore(0,'\n'); getline(cin, dataInput.kode_dosen, '\n');
+    cout << "Nama        : "; cin.ignore(0,'\n'); getline(cin, dataInput.nama, '\n');
+    cout << "Mata Kuliah : "; cin.ignore(0,'\n'); getline(cin, dataInput.matkul, '\n');
+
+    New_Elm_Dosen(dataInput, adrDosen);
+    Insert_Last_Dosen(list_dosen, adrDosen);
+
+    cout << "\nBerhasil Menambahkan Data Dosen!" << endl;
+    Back_To_Menu(input);
+}
+
+void Menu_Hapus_Dosen(mll &list_dosen, int &input) {
+    string kodeDosen;
+    adr_dosen found;
+
+    cout << "Masukkan Kode Dosen: "; cin >> kodeDosen;
+    found = Search_Dosen_By_Code(list_dosen, kodeDosen);
+    if (found != nil){
+        Delete_DosenX(list_dosen, found);
+
+        cout << "\nBerhasil Menghapus Data Dosen!" << endl;
+    } else {
+        cout << "\nKode Dosen Tidak Ditemukan!" << endl;
+    }
+
+    Back_To_Menu(input);
+}
+
+void Menu_Tambah_Mahasiswa_Ke_Dosen(mll &list_dosen, int &input){
+    mahasiswa dataInput;
+    adr_mahasiswa adrMahasiswa;
+    string kodeDosen;
+
+    cout << "Lengkapi Data Berikut!" << endl;
+    cout << "NIM         : "; cin.ignore(1,'\n'); getline(cin, dataInput.nim, '\n') ;
+    cout << "Nama        : "; cin.ignore(0,'\n'); getline(cin, dataInput.nama, '\n');
+    cout << "Judul TA    : "; cin.ignore(0,'\n'); getline(cin, dataInput.judulTugasAkhir, '\n');
+    cout << "Kode Dosen  : "; cin >> kodeDosen;
+
+    New_Elm_Mahasiswa(dataInput, adrMahasiswa);
+    Insert_New_Mahasiswa(list_dosen, Search_Dosen_By_Code(list_dosen, kodeDosen), adrMahasiswa);
+
+    cout << "\nBerhasil Menambahkan Data Mahasiswa ke Kode Dosen: " << kodeDosen << endl;
+    Back_To_Menu(input);
+
+}
+
+void Menu_Tampilkan_Mahasiswa_Dari_Dosen(mll &list_dosen, int &input){
+    string kodeDosen;
+    adr_dosen found;
+
+    cout << "Masukkan Kode Dosen: "; cin >> kodeDosen;
+
+    found = Search_Dosen_By_Code(list_dosen, kodeDosen);
+    if (found != nil){
+        Show_Mahasiswa_From_Dosen(found);
+        cout << endl;
+    } else {
+        cout << "\nKode Dosen Tidak Ditemukan!" << endl;
+    }
+
+    Back_To_Menu(input);
+}
+
+void Menu_Mahasiswa_Terbanyak(mll &list_dosen, int &input){
+    cout << "----------------------------------------------------------" << endl;
+    cout << "Dosen dengan Mahasiswa Bimbingan Terbanyak" << endl;
+    cout << "----------------------------------------------------------" << endl;
+    Show_Largest_Mahasiswa(list_dosen);
+
+
+    cout << endl;
+    Back_To_Menu(input);
 }
