@@ -45,19 +45,20 @@ adr_dosen Search_Dosen_By_Code(mll list_dosen, string kode_dosen) {
     return curr;
 }
 
-void Show_Dosen_Data(mll list_dosen, string kode_dosen) {
-    adr_dosen searched = Search_Dosen_By_Code(list_dosen, kode_dosen);
-    if (searched == nil){
-        cout << "Dosen dengan kode dosen " << kode_dosen << " tidak Ditemukan" << endl;
-    }else{
-        cout << "Nama                   : " << info(searched).nama << endl;
-        cout << "NIK                    : " << info(searched).nik << endl;
-        cout << "Mata Kuliah Pengampu   : " << info(searched).matkul << endl;
-        cout << "Kode Dosen             : " << info(searched).kode_dosen << endl;
+void Show_Dosen_Data(adr_dosen dosen) {
+    cout << "Nama                   : " << info(dosen).nama << endl;
+    cout << "NIK                    : " << info(dosen).nik << endl;
+    cout << "Mata Kuliah Pengampu   : " << info(dosen).matkul << endl;
+    cout << "Kode Dosen             : " << info(dosen).kode_dosen << endl;
 
-        cout << "Daftar Mahasiswa Yang Dimbimbing : " << endl;
-        Show_Mahasiswa_From_Dosen(searched);
-    }
+    cout << "Daftar Mahasiswa Yang Dimbimbing : " << endl;
+    Show_Mahasiswa_From_Dosen(dosen);
+}
+
+void Show_Mahasiswa_Data(adr_mahasiswa mahasiswa) {
+    cout << "Nama                   : " << info(mahasiswa).nama << endl;
+    cout << "NIK                    : " << info(mahasiswa).nim << endl;
+    cout << "Mata Kuliah Pengampu   : " << info(mahasiswa).judulTugasAkhir << endl;
 }
 
 adr_dosen Delete_First_Dosen(mll &list_dosen){
@@ -206,7 +207,6 @@ void Delete_Mahasiswa_Bimbingan_From_Dosen(mll &list_dosen, adr_dosen adrDosen, 
                         currMhs == nextMahasiswa(currMhs);
                     }
                     if (currMhs != nil){
-                            cout << info(currMhs).nama << endl;
                         nextMahasiswa(currMhs) = nextMahasiswa(nextMahasiswa(currMhs));
                     }
                 }else{
@@ -218,7 +218,7 @@ void Delete_Mahasiswa_Bimbingan_From_Dosen(mll &list_dosen, adr_dosen adrDosen, 
 }
 
 
-string Search_Nama_Dospem_From_Mahasiswa(mll list_dosen, adr_mahasiswa adrMahasiswa){
+string Search_Nama_Dospem_From_Mahasiswa(mll list_dosen, string nim_mhs){
     adr_dosen currDosen = first(list_dosen);
 
     if (currDosen == nil){
@@ -227,19 +227,18 @@ string Search_Nama_Dospem_From_Mahasiswa(mll list_dosen, adr_mahasiswa adrMahasi
     }else{
         do {
             adr_mahasiswa currMhs = nextMahasiswa(currDosen);
-            cout << info(currMhs).nama << endl;
-            while(currMhs != nil && currMhs != adrMahasiswa){
+            while(currMhs != nil && info(currMhs).nim != nim_mhs){
                 currMhs = nextMahasiswa(currMhs);
             }
-            if (currMhs == adrMahasiswa){
+            if (currMhs != nil && info(currMhs).nim == nim_mhs){
                     return info(currDosen).nama;
             }else{
                 currDosen = nextDosen(currDosen);
             }
-        }while(currDosen == nil);
+        }while(currDosen != nil);
     }
 
-    cout << "Tidak ada dosen pembimbing dari mahasiswa " << info(adrMahasiswa).nama << endl;
+    cout << "Tidak ada mahasiswa dengan NIM " << nim_mhs << endl;
 
     return "";
 }
@@ -299,7 +298,7 @@ void Show_Largest_Mahasiswa(mll list_dosen){
     } else {
         cout << "Total Mahasiswa: " << maxTotal << endl;
         cout << endl;
-        Show_Dosen_Data(list_dosen, info(maxDosen).kode_dosen);
+        Show_Dosen_Data(maxDosen);
     }
 }
 
@@ -322,7 +321,7 @@ void Menu_Exit(){
     cout << "TERIMAKASIH" << endl;
     cout << "\nDevelop By: " << endl;
     cout << "1. 1301218681 - Firna Firdiani" << endl;
-    cout << "1. 1301218683 - Mazid Ahmad" << endl;
+    cout << "2. 1301218683 - Mazid Ahmad" << endl;
 }
 
 void Menu_Tambah_Dosen(mll &list_dosen, int &input){
@@ -403,5 +402,140 @@ void Menu_Mahasiswa_Terbanyak(mll &list_dosen, int &input){
 
 
     cout << endl;
+    Back_To_Menu(input);
+}
+
+void Menu_Menampilkan_Dosen_X(mll list_dosen, int &input){
+    string kodeDosen;
+    adr_dosen searchedDosen;
+
+    cout << "Masukkan Kode Dosen yang ingin dicari" << endl;
+    cout << endl;
+    cout << "Kode Dosen: "; cin >> kodeDosen; cout << endl;
+    searchedDosen = Search_Dosen_By_Code(list_dosen, kodeDosen);
+
+    if (searchedDosen != nil){
+        Show_Dosen_Data(searchedDosen);
+    }else{
+        cout << "Dosen dengan kode dosen " << kodeDosen << " tidak Ditemukan" << endl;
+    }
+    cout << endl;
+
+    Back_To_Menu(input);
+}
+
+void Menu_Cari_Dosen_X(mll list_dosen, int &input){
+    string kodeDosen;
+    adr_dosen searchedDosen;
+
+
+    cout << "Masukkan Kode Dosen yang ingin dicari" << endl;
+    cout << endl;
+    cout << "Kode Dosen: "; cin >> kodeDosen; cout << endl;
+    searchedDosen = Search_Dosen_By_Code(list_dosen, kodeDosen);
+
+    if (searchedDosen != nil){
+        cout << "Dosen dengan kode " << kodeDosen << " ditemukan." << endl;
+
+        char decision;
+
+        decision = 'l';
+        while (decision != 'Y' && decision != 'y' && decision != 'N' && decision != 'n') {
+            cout << "Tampilkan data dosen tersebut? " << " [Y/N] : "; cin >> decision;
+            cout << endl;
+        }
+        if (decision == 'Y' || decision == 'y'){
+            Show_Dosen_Data(searchedDosen);
+        }
+    }else{
+        cout << "Dosen dengan kode dosen " << kodeDosen << " tidak Ditemukan" << endl;
+    }
+    cout << endl;
+
+    Back_To_Menu(input);
+}
+
+void Menu_Hapus_Mahasiswa_Y_Dari_Dosen_X(mll &list_dosen, int &input){
+    string kodeDosen;
+    string nimMhs;
+    adr_dosen searchedDosen;
+    adr_mahasiswa searchedMahasiswa;
+
+    cout << "Masukkan Kode Dosen yang ingin dicari" << endl;
+    cout << endl;
+    cout << "Kode Dosen: "; cin >> kodeDosen; cout << endl;
+    searchedDosen = Search_Dosen_By_Code(list_dosen, kodeDosen);
+    Show_Dosen_Data(searchedDosen);
+    cout << endl;
+    if (searchedDosen != nil){
+        cout << "Masukkan NIM Mahasiswa yang ingin dihapus" << endl;
+        cout << endl;
+        cout << "NIM : "; cin >> nimMhs; cout << endl;
+        searchedMahasiswa = Search_Mahasiswa_From_Dosen(searchedDosen, nimMhs);
+
+        if (searchedMahasiswa != nil){
+            Delete_Mahasiswa_Bimbingan_From_Dosen(list_dosen, searchedDosen, searchedMahasiswa);
+            cout << "Mahasiswa dengan NIM " << nimMhs << " berhasil dihapus dari dosen." << endl;
+            cout << endl;
+            Show_Dosen_Data(searchedDosen);
+        }else{
+            cout << "Mahasiswa dengan NIM " << nimMhs << " tidak Ditemukan" << endl;
+        }
+    }else{
+        cout << "Dosen dengan kode dosen " << kodeDosen << " tidak Ditemukan" << endl;
+    }
+    cout << endl;
+
+    Back_To_Menu(input);
+}
+
+void Menu_Search_Mahasiswa_Y_Dari_Dosen_X(mll list_dosen, int &input){
+    string kodeDosen;
+    string nimMhs;
+    adr_dosen searchedDosen;
+    adr_mahasiswa searchedMahasiswa;
+
+    cout << "Masukkan Kode Dosen yang ingin dicari" << endl;
+    cout << endl;
+    cout << "Kode Dosen: "; cin >> kodeDosen; cout << endl;
+    searchedDosen = Search_Dosen_By_Code(list_dosen, kodeDosen);
+    cout << endl;
+    if (searchedDosen != nil){
+        cout << "Masukkan NIM Mahasiswa yang dicari" << endl;
+        cout << endl;
+        cout << "NIM : "; cin >> nimMhs; cout << endl;
+        searchedMahasiswa = Search_Mahasiswa_From_Dosen(searchedDosen, nimMhs);
+
+        if (searchedMahasiswa != nil){
+            Show_Mahasiswa_Data(searchedMahasiswa);
+        }else{
+            cout << "Mahasiswa dengan NIM " << nimMhs << " tidak Ditemukan" << endl;
+        }
+    }else{
+        cout << "Dosen dengan kode dosen " << kodeDosen << " tidak Ditemukan" << endl;
+    }
+    cout << endl;
+
+    Back_To_Menu(input);
+}
+
+void Menu_Cari_Dosen_Dari_Mahasiswa_X(mll list_dosen, int &input){
+    string kodeDosen;
+    string nimMhs;
+    adr_dosen searchedDosen;
+    adr_mahasiswa searchedMahasiswa;
+
+    cout << "Masukkan NIM mahasiswa untuk mencari dosen pembimbingnya" << endl;
+    cout << endl;
+    cout << "NIM : "; cin >> nimMhs; cout << endl;
+
+    string namaDosen = Search_Nama_Dospem_From_Mahasiswa(list_dosen, nimMhs);
+
+    if (namaDosen != ""){
+        cout << "Nama Dosen : " << namaDosen << endl;
+    }
+
+    cout << endl;
+
     Back_To_Menu(input);
 }
