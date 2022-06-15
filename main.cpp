@@ -62,20 +62,38 @@ int main()
             case 1:
                 Menu_Tambah_Dosen(list_dosen, input);
                 break;
+            case 2:
+                Menu_Menampilkan_Dosen_X(list_dosen, input);
+                break;
             case 3:
                 Menu_Hapus_Dosen(list_dosen, input);
+                break;
+            case 4:
+                Menu_Cari_Dosen_X(list_dosen, input);
                 break;
             case 5:
                 Menu_Tambah_Mahasiswa_Ke_Dosen(list_dosen, input);
                 break;
+            case 6:
+                Menu_Hapus_Mahasiswa_Y_Dari_Dosen_X(list_dosen, input);
+                break;
             case 7:
                 Menu_Tampilkan_Mahasiswa_Dari_Dosen(list_dosen, input);
+                break;
+            case 8:
+                Menu_Search_Mahasiswa_Y_Dari_Dosen_X(list_dosen, input);
                 break;
             case 9:
                 Menu_Tambah_Mahasiswa_Ke_Dosen(list_dosen, input);
                 break;
+            case 10:
+                Menu_Hapus_Mahasiswa_Y_Dari_Dosen_X(list_dosen, input);
+                break;
             case 11:
                 Menu_Mahasiswa_Terbanyak(list_dosen, input);
+                break;
+            case 12:
+                Menu_Cari_Dosen_Dari_Mahasiswa_X(list_dosen, input);
                 break;
         }
 

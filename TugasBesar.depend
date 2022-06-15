@@ -10,15 +10,17 @@
 1654608725 d:\dokumen\ekstensi\perkuliahan\semester 1\(std) struktur data\tugas besar\tugas-besar-std\mll.h
 	<iostream>
 
-1655108945 source:c:\tugas-besar-std\main.cpp
+1655300986 source:c:\tugas-besar-std\main.cpp
 	<iostream>
+	<stdlib.h>
 	"mll.h"
 
-1655051447 c:\tugas-besar-std\mll.h
+1655301544 c:\tugas-besar-std\mll.h
 	<iostream>
 
-1655109375 source:c:\tugas-besar-std\mll.cpp
+1655301945 source:c:\tugas-besar-std\mll.cpp
 	<iostream>
+	<string>
 	"mll.h"
 
 1655217963 source:d:\dokumen\ekstensi\perkuliahan\semester 1\(std) struktur data\tugas besar\tugas-besar-std\tugas-besar-std\main.cpp
